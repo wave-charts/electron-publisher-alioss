@@ -5,20 +5,20 @@
   "scripts": {
     "build": "tsc",
     "lint": "tslint src/**/*.ts",
-    "publish" : "npm run build && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "dependencies": {
-    "ali-oss": "^6.1.0",
+    "ali-oss": "^6.11.2",
     "app-builder-lib": "^20.38.5",
     "builder-util": "^9.6.2",
-    "electron-publish": "^20.38.5",
+    "electron-publish": "^22.9.1",
     "fs-extra-p": "^7.0.0",
     "path": "^0.12.7"
   },
   "repository": "https://github.com/uihoh0/electron-publisher-alioss.git",
   "devDependencies": {
     "tslint": "^5.11.0",
-    "typescript": "^3.1.4"
+    "typescript": "^4.0.3"
   },
   "author": "uihoh0 <uihoh0@gmail.com>",
   "license": "MIT",
