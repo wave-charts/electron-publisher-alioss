@@ -21,10 +21,11 @@ interface AliOssPublisherConfig {
   maxResume: number;
   localConfig: string;
   path: string;
+  useSafeArtifactName?: boolean;
 }
 export default class AliOssPublisher extends HttpPublisher {
   public readonly providerName = "alioss";
-  protected useSafeName = true;
+  protected useSafeName: boolean;
   private readonly client: OSS;
   protected readonly context!: AliOssPublishContext;
   protected config: AliOssPublisherConfig;
@@ -32,12 +33,10 @@ export default class AliOssPublisher extends HttpPublisher {
   protected constructor(
     context: AliOssPublishContext,
     publishConfig: AliOssPublisherConfig,
-    useSafeArtifactName?: boolean,
   ) {
     super(context);
-    // const config = this.getConfig();
-    this.useSafeName = useSafeArtifactName || true;
     let config = publishConfig;
+    this.useSafeName = config.useSafeArtifactName || false;
     if (publishConfig.localConfig) {
       const localConfig = require(resolve(
         this.context.packager.appDir,
@@ -86,8 +85,6 @@ export default class AliOssPublisher extends HttpPublisher {
         .replace(/\${os}/g, os)
         .replace(/\${arch}/g, archName)
         .replace(/{filename}/g, fileName);
-      console.log({ fileName });
-      console.log({ uploadName });
     }
     this.context.cancellationToken.createPromise(async (resolve, reject) => {
       const { resumable } = this.config;
